@@ -1,0 +1,12 @@
+{
+    "Alexnet": "alexnet",
+    "VGG19": "vgg19",
+    "VGG16": "vgg16",
+    "VGG13": "vgg13",
+    "VGG11": "vgg11",
+    "ResNet18": "resnet18",
+    "ResNet34": "resnet34",
+    "ResNet50": "resnet50",
+    "ResNet101": "resnet101",
+    "ResNet152": "resnet152"
+}

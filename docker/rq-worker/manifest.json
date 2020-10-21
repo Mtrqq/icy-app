@@ -1,0 +1,13 @@
+{
+    "tag": "mtrqq/icy-rq-worker",
+    "sources": [
+        {
+            "source": "classifier",
+            "targetFolder": "classifier",
+            "exclude": [
+                "**/.env/*",
+                "**/.venv/*"
+            ]
+        }
+    ]
+}

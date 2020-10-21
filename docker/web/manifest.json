@@ -1,0 +1,21 @@
+{
+    "tag": "mtrqq/icy-web",
+    "sources": [
+        {
+            "source": "classifier",
+            "targetFolder": "classifier",
+            "exclude": [
+                "**/.env/*",
+                "**/.venv/*"
+            ]
+        },
+        {
+            "source": "web",
+            "targetFolder": "app",
+            "exclude": [
+                "**/.env/*",
+                "**/.venv/*"
+            ]
+        }
+    ]
+}

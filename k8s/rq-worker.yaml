@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rq-worker
+  labels:
+    service: rq-worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: rq-worker
+  template:
+    metadata:
+      labels:
+        service: rq-worker
+    spec:
+      volumes:
+        - name: torch-cache
+          persistentVolumeClaim:
+            claimName: torch-cache-pvc
+      containers:
+        - name: rq-worker
+          image: mtrqq/icy-rq-worker:0.3.0
+          volumeMounts:
+            - name: torch-cache
+              mountPath: /mnt/.cache/torch
+          env:
+            - name: REDIS_HOST
+              value: redis-queue
+            - name: REDIS_PORT
+              value: "6379"
+            - name: TORCH_HOME
+              value: /mnt/.cache/torch
+          resources:
+            limits:
+              memory: "4Gi"
+              cpu: "4000m"
+            requests:
+              memory: "2Gi"
+              cpu: "2000m"
