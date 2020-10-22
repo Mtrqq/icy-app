@@ -1,4 +1,4 @@
 include README.md
 include VERSION
-include icy_server/main/static/*.*
-include icy_server/main/templates/*.*
+include icy/server/static/*.*
+include icy/server/templates/*.*

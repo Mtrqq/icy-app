@@ -6,4 +6,4 @@ COPY ./classifier /usr/src/classifier
 RUN python -m pip install /usr/src/classifier --no-cache-dir && \
     python -m pip install /usr/src/app/ --no-cache-dir
 
-ENTRYPOINT [ "python", "-m", "icy_server"]
+ENTRYPOINT [ "python", "-m", "icy.server"]

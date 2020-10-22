@@ -3,7 +3,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List
 
-from setuptools import find_packages, setup
+from setuptools import find_namespace_packages, setup
 
 
 def get_extra_requires(extras_location):
@@ -28,7 +28,7 @@ def get_extra_requires(extras_location):
     return extra_deps
 
 
-PACKAGE_NAME = "img-classifier"
+PACKAGE_NAME = "icy-classifier"
 SUMMARY = "Image classifying library based on PyTorch"
 CLASSIFIERS = [
     "Development Status :: 3 - Alpha",
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         long_description=README,
         long_description_content_type="text/markdown",
         include_package_data=True,
-        packages=find_packages(),
+        packages=find_namespace_packages(),
         install_requires=REQUIREMENTS,
         extras_require=EXTRA_REQUIREMENTS,
     )

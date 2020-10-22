@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-from setuptools import find_packages, setup
+from setuptools import find_namespace_packages, setup
 
 
 PACKAGE_NAME = "icy-server"
@@ -32,6 +32,6 @@ if __name__ == "__main__":
         long_description=README,
         long_description_content_type="text/markdown",
         include_package_data=True,
-        packages=find_packages(),
+        packages=find_namespace_packages(),
         install_requires=REQUIREMENTS,
     )
