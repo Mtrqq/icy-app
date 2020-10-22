@@ -52,11 +52,7 @@ def flake8(session: "nox.Session") -> None:
 def bandit(session: "nox.Session") -> None:
     session.install("bandit")
     session.run(
-        "bandit",
-        "-r",
-        ".",
-        "-c",
-        BANDIT_CONFIGURATION,
+        "bandit", "-r", ".", "-c", BANDIT_CONFIGURATION,
     )
 
 
@@ -83,10 +79,17 @@ def pylint(session: "nox.Session") -> None:
 
 @nox.session(python=False)
 def kubeval(session: "nox.Session") -> None:
-    k8s_folder = str(HERE / "k8s")
+    k8s_folder = (HERE / "k8s").absolute()
     kubeval_image = "garethr/kubeval:0.15.0"
     session.run(
-        "docker", "run", "--rm", "-v", f"{k8s_folder}:/usr/app/k8s", kubeval_image, "/usr/app/k8s/*"
+        "docker",
+        "run",
+        "--rm",
+        "-v",
+        f"{k8s_folder}:/usr/app/k8s",
+        kubeval_image,
+        "-d",
+        "/usr/app/k8s/",
     )
 
 
