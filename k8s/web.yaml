@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: mtrqq/icy-web:0.1.0
+          image: mtrqq/icy-web:0.4.0
           env:
             - name: REDIS_HOST
               value: redis-queue

@@ -4,6 +4,6 @@ COPY ./app /usr/src/app
 COPY ./classifier /usr/src/classifier
 
 RUN python -m pip install /usr/src/classifier --no-cache-dir && \
-    python -m pip install -r /usr/src/app/requirements.txt --no-cache-dir
+    python -m pip install /usr/src/app/ --no-cache-dir
 
-ENTRYPOINT [ "python", "/usr/src/app/__main__.py"]
+ENTRYPOINT [ "python", "-m", "icy_server"]
