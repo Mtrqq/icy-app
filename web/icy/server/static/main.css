@@ -16,7 +16,7 @@ h1.error {
     font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     top: 50%;
-    margin-left: 51%;
+    margin-left: 43%;
     min-width: 225px;
     color: white;
     text-decoration: none;
@@ -62,7 +62,7 @@ h1.error {
 textarea {
     top: 25%;
     position: absolute;
-    left: 35%;
+    left: 32%;
     font-family: Arial, Helvetica, sans-serif;
     border-color: #0563af;
     min-width: 239px;;
