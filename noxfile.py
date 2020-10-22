@@ -13,7 +13,6 @@ nox.options.error_on_missing_interpreters = True
 HERE = Path(__file__).parent.absolute()
 
 BANDIT_CONFIGURATION = str(HERE / "configs" / "bandit.yml")
-PYLINT_CONFIGURATION = str(HERE / "configs" / "pylint.cfg")
 GLOBAL_CONFIGURATION = str(HERE / "setup.cfg")
 
 ADDITIONAL_FILES = [str(HERE / "noxfile.py")]
@@ -62,21 +61,6 @@ def mypy(session: "nox.Session") -> None:
     session.run("mypy", *locate_linted_files(), "--pretty", "--ignore-missing-imports")
 
 
-@nox.session(python=DEFAULT_PYTHON_INTERPRETER)
-def pylint(session: "nox.Session") -> None:
-    session.install("pylint==2.4.2")
-
-    session.run(
-        "pylint",
-        *locate_linted_files(),
-        "-f",
-        "colorized",
-        "--rcfile",
-        PYLINT_CONFIGURATION,
-        "--exit-zero",
-    )
-
-
 @nox.session(python=False)
 def kubeval(session: "nox.Session") -> None:
     k8s_folder = (HERE / "k8s").absolute()
@@ -119,7 +103,7 @@ def lint(session: "nox.Session") -> None:
     flake8(session)
     bandit(session)
     mypy(session)
-    pylint(session)
+    kubeval(session)
 
 
 @nox.session(python=DEFAULT_PYTHON_INTERPRETER)
