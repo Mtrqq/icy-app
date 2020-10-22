@@ -21,7 +21,7 @@ def load_image(image_url: str) -> "PIL.Image.Image":
     get_response = requests.get(image_url, stream=True)
     if get_response.status_code != 200:
         raise ValueError("Invalid image url provided, unable to load image")
-    return Image.open(get_response.raw)
+    return Image.open(get_response.raw).convert("RGB")
 
 
 def _make_preprocessor(mean: List[float], std: List[float]) -> "transforms.Compose":

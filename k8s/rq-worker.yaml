@@ -32,7 +32,7 @@ spec:
           command: ["sh", "-c", "until nslookup redis-queue; do sleep 2; done"]
       containers:
         - name: rq-worker
-          image: mtrqq/icy-rq-worker:1.1.1
+          image: mtrqq/icy-rq-worker:1.2.0
           volumeMounts:
             - name: torch-cache
               mountPath: /mnt/.cache/torch
