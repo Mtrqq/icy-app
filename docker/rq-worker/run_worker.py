@@ -5,7 +5,7 @@ from redis.exceptions import ConnectionError
 from rq import Worker
 
 # import to cache package importing
-import classifier  # noqa
+import icy.classifier  # noqa
 
 
 LOCALHOST: str = "0.0.0.0"

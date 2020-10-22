@@ -1,7 +1,8 @@
 import flask
 
-import icy.server.tasks as tasks
 import icy.classifier as classifier
+import icy.server.tasks as tasks
+
 
 main_blueprint = flask.Blueprint("main", __name__)
 
@@ -31,7 +32,11 @@ def classification_status(task_id: str):
         return {
             "Status": "Success",
             "Data": {
-                "Task": {"ID": task.get_id(), "Status": task.get_status(), "Result": task.result,}
+                "Task": {
+                    "ID": task.get_id(),
+                    "Status": task.get_status(),
+                    "Result": task.result,
+                }
             },
         }
     else:

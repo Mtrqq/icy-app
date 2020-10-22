@@ -3,8 +3,8 @@ __all__ = ["list_available_models", "recognize_image", "stringify_label"]
 from pathlib import Path
 from typing import List, Tuple, Union
 
-from .utils import load_json_cached as _load_json
-from .recognize import recognize_image as _recognize_image
+from icy.classifier.recognize import recognize_image as _recognize_image
+from icy.classifier.utils import load_json_cached as _load_json
 
 
 HERE = Path(__file__).parent

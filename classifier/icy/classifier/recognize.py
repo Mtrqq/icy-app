@@ -1,6 +1,6 @@
+import logging
 from itertools import takewhile
 from typing import List, Tuple
-import logging
 
 import requests
 
@@ -10,7 +10,7 @@ _DEFAULT_STD: List[float] = [0.229, 0.224, 0.225]
 _PROBABILITY_THRESHOLD: float = 0.005
 
 
-logging.basicConfig(level='INFO', format="%(asctime)s:%(levelname)s:%(name)s:%(message)s")
+logging.basicConfig(level="INFO", format="%(asctime)s:%(levelname)s:%(name)s:%(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -35,10 +35,10 @@ def _make_preprocessor(mean: List[float], std: List[float]) -> "transforms.Compo
 
 def _load_model(model_name: str, pretrained: bool = True) -> "nn.Module":
     import torchvision.models as models
-    
+
     try:
         loader = getattr(models, model_name)
-        logger.info('Loading pretrained model (%s)', model_name)
+        logger.info("Loading pretrained model (%s)", model_name)
         return loader(pretrained=pretrained)
     except AttributeError as error:
         raise RuntimeError(f"Unsupported model type '{model_name}'") from error
@@ -60,9 +60,9 @@ def recognize_image(image_url: str, model_name: str) -> List[Tuple[int, float]]:
     model, softmax, preprocessor = _prepare_operators(model_name=model_name)
     inputs = preprocessor(image)
     inputs.unsqueeze_(0)  # unsqueeze inplace
-    logger.info('Start processing image')
+    logger.info("Start processing image")
     classification_matrix = softmax(model(autograd.Variable(inputs)))[0].sort(descending=True)
-    logger.info('Processing finished ! Preparing output data')
+    logger.info("Processing finished ! Preparing output data")
     values, indices = classification_matrix.values, classification_matrix.indices
     return [
         (int(label), float(prob))

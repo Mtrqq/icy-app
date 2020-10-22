@@ -1,5 +1,5 @@
-import os
 import functools
+import os
 from typing import Any, Callable
 
 import redis

@@ -1,0 +1,13 @@
+{
+    "tag": "mtrqq/icy-worker-preheater",
+    "sources": [
+        {
+            "source": "classifier",
+            "targetFolder": "classifier",
+            "exclude": [
+                "**/.env/*",
+                "**/.venv/*"
+            ]
+        }
+    ]
+}

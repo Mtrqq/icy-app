@@ -5,7 +5,7 @@ metadata:
   labels:
     service: rq-worker
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       service: rq-worker
@@ -18,9 +18,21 @@ spec:
         - name: torch-cache
           persistentVolumeClaim:
             claimName: torch-cache-pvc
+      initContainers:
+        - name: worker-preheater
+          image: mtrqq/icy-worker-preheater:0.0.2
+          volumeMounts:
+            - name: torch-cache
+              mountPath: /mnt/.cache/torch
+          env:
+            - name: TORCH_HOME
+              value: /mnt/.cache/torch
+        - name: init-redis-queue
+          image: busybox:1.28
+          command: ["sh", "-c", "until nslookup redis-queue; do sleep 2; done"]
       containers:
         - name: rq-worker
-          image: mtrqq/icy-rq-worker:0.3.0
+          image: mtrqq/icy-rq-worker:1.1.1
           volumeMounts:
             - name: torch-cache
               mountPath: /mnt/.cache/torch
@@ -38,3 +50,17 @@ spec:
             requests:
               memory: "2Gi"
               cpu: "2000m"
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rq-workers-autoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rq-worker
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 50

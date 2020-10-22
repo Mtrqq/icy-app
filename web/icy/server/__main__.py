@@ -2,6 +2,7 @@ import os
 
 from icy.server import app
 
+
 LOCALHOST: str = "0.0.0.0"
 
 
